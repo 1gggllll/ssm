@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- DI
+单个参数注入-->
+    <bean id="userDao" class="com.my.ioc_02.UserDao"/>
+    <bean id="userService" class="com.my.ioc_02.UserService">
+        <!-- constructor-arg 构造参数传值的di配置
+         value是直接属性
+         ref应用其他的
+         name/index（从0开始）
+         bean-->
+        <constructor-arg ref="userDao"/>
+        <constructor-arg value="18"/>
+        <constructor-arg value="1111"/>
+    </bean>
+    <bean id="userService2" class="com.my.ioc_02.UserService">
+        <constructor-arg ref="userDao"/>
+        <constructor-arg value="18"/>
+        <constructor-arg value="xiaoming"/>
+    </bean>
+</beans>
