@@ -11,6 +11,7 @@
     <modules>
         <module>ssm-maven-part01</module>
         <module>ssm-ioc-test01</module>
+        <module>ssm-zhujie</module>
     </modules>
 
     <properties>

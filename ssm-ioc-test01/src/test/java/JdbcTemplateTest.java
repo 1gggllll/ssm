@@ -3,10 +3,12 @@ import com.ioc.test.Student;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -48,4 +50,23 @@ public class JdbcTemplateTest {
         }, 2);
         System.out.println("student = " + student);
     }
+    @Test
+    public void testDQLForListPojo(){
+
+        String sql = "select id , name , age , gender , class as classes from students  ;";
+
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("spring01.xml");
+
+        JdbcTemplate jdbcTemplate = applicationContext.getBean(JdbcTemplate.class);
+    /*
+        query可以返回集合!
+        BeanPropertyRowMapper就是封装好RowMapper的实现,要求属性名和列名相同即可
+     */
+        List<Student> studentList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Student.class));
+        System.out.println("studentList = " + studentList);
+
+    }
+
 }
+
